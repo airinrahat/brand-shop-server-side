@@ -41,7 +41,6 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
-
     app.get("/cart", async (req, res) => {
       const cursor = productCollection.find();
       const result = await cursor.toArray();
