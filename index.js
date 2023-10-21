@@ -56,9 +56,19 @@ async function run() {
     });
 
     // add to cart get
+    // app.get("/addtocart", async (req, res) => {
+    //   const cursors = CartCollection.find();
+    //   const result = await cursors.toArray();
+    //   res.send(result);
+    // });
+
     app.get("/addtocart", async (req, res) => {
-      const cursors = CartCollection.find();
-      const result = await cursors.toArray();
+      console.log(req.query.email);
+      let query = {};
+      if (req.query?.email) {
+        query = { email: req.query.email };
+      }
+      const result = await CartCollection.find(query).toArray();
       res.send(result);
     });
 
