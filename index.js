@@ -50,7 +50,6 @@ async function run() {
       const result = await productCollection.insertOne(newProduct);
       res.send(result);
     });
-
     // add to cart get
     app.get("/addtocart", async (req, res) => {
       const cursors = CartCollection.find();
@@ -73,7 +72,6 @@ async function run() {
       const result = await productCollection.findOne(query);
       res.send(result);
     });
-
     app.put("/cart/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
