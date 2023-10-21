@@ -10,8 +10,6 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-//carBrand
-//fkbuOUbxNLo6Hk1d
 // console.log(process.env.DB_USERS);
 // console.log(process.env.DB_PASS);
 
@@ -33,12 +31,19 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
+
     const productCollection = client.db("productDB").collection("product");
     const brandCollection = client.db("productDB").collection("allBrand");
     const CartCollection = client.db("productDB").collection("addcart");
 
     app.get("/allbrand", async (req, res) => {
       const cursor = brandCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
+    app.get("/cart", async (req, res) => {
+      const cursor = productCollection.find();
       const result = await cursor.toArray();
       res.send(result);
     });
@@ -50,6 +55,7 @@ async function run() {
       const result = await productCollection.insertOne(newProduct);
       res.send(result);
     });
+
     // add to cart get
     app.get("/addtocart", async (req, res) => {
       const cursors = CartCollection.find();
