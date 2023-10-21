@@ -43,13 +43,6 @@ async function run() {
       res.send(result);
     });
 
-    //read data
-    app.get("/cart", async (req, res) => {
-      const cursor = productCollection.find();
-      const result = await cursor.toArray();
-      res.send(result);
-    });
-
     //create data
     app.post("/cart", async (req, res) => {
       const newProduct = req.body;
@@ -72,7 +65,6 @@ async function run() {
       const result = await CartCollection.insertOne(newProduct);
       res.send(result);
     });
-
     //update data
     app.get("/cart/:id", async (req, res) => {
       const id = req.params.id;
